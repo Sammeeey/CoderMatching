@@ -1,0 +1,41 @@
+<!-- Template inheritance based on
+https://docs.djangoproject.com/en/4.0/ref/templates/builtins/#extends
+https://docs.djangoproject.com/en/4.0/ref/templates/language/#template-inheritance
+https://docs.djangoproject.com/en/4.0/howto/overriding-templates/#how-to-override-templates
+
+https://learndjango.com/tutorials/template-structure    -> either use the app or the project level approach (recommendation: project level)
+( https://stackoverflow.com/questions/16899917/django-template-inheritance-how-many-levels-and-what-page-to-render/#answer-16900872 )
+
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A simple HTML5 Template for new projects.">
+        <meta name="author" content="SitePoint">
+        <title>{% block title %}CoderMatching - Build a team for your coding projects, gather experience and to START developing real world applications{% endblock title %}</title>
+        <link rel="stylesheet" href="styles/style.css">
+    </head>
+    <body>
+        <header>
+        {% block header %}
+        <p><a href="{% url 'codermatch:index' %}">&lt; back to index</a></p>
+            <nav></nav>
+        {% endblock header %}
+        </header>
+        <main>
+        {% block main %}
+        {% endblock main %}
+        </main>
+        <footer>
+        {% block footer %}
+        {% endblock footer %}
+        </footer>
+        {% block scripts %}    
+        <script src="js/script.js"></script>
+        {% endblock scripts %}    
+    </body>
+</html>

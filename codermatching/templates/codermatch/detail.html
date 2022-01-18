@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1>{{ ad.projectTitle }}</h1>
+<p>{{ ad.projectDescription }}</p>
+
+<form action="{% url 'codermatch:adDetail' ad.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <h3>Comments on {{ ad.projectTitle }}</h3>
+        </legend>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        <u>Wanna vote on the following comments?</u><br>
+        {% for comment in ad.comment_set.all %}
+        <input type="radio" name="comment" id="comment{{ forloop.counter }}" value="{{ comment.id }}">
+        <label for="comment{{ forloop.counter }}"><strong>{{ comment.commentText }}</strong> ({{ comment.likes }} ❤️)</label><br>
+        {% empty %}
+        <ul>
+            <p>There aren't any comments on this project, yet.</p>
+            <p>but with the lorem template tag we imitate a similar behavior</p>
+            <li>Comment: {% lorem 1 p %}</li>
+            <li>Comment: {% lorem 1 p random %}</li>
+            <li>Comment: {% lorem 1 p %}</li>
+        </ul>
+
+        {% endfor %}
+    </fieldset>
+<input type="submit" name="submit" id="submit" value="like">
+</form>
+{% endblock main %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<form action="{% url 'codermatch:vote' ad.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <a href="{% url 'codermatch:adDetail' ad.id %}"><h1>{{ ad.projectTitle }}</h1></a>
+        </legend>
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+        {% for comment in ad.comment_set.all %}
+            <input type="radio" name="comment" id="comment{{ forloop.counter }}" value="{{ comment.id }}">
+            <label for="comment{{ forloop.counter }}">{{ comment.commentText }}</label><br>
+        {% endfor %}
+    </fieldset>
+<input type="submit" name="submit" id="submit" value="like">
+</form>
+{% endblock main %}

@@ -1,0 +1,35 @@
+<h1>{{ numi }}</h1>
+<a href="/codermatch">{{ numArg }}</a>
+{% if numArg|divisibleby:"3" %}
+<p>The number given in the URL <strong>is</strong> divisible by 3</p>
+{% elif not numArg|divisibleby:"3" %}
+<p>The number given in the URL is <strong>not</strong> divisible by 3</p>
+{% endif %}
+{% with len=numArg|slugify|length %}
+<p>The number given in the URL has {{ len }} digit{{ len|pluralize }}.</p>
+{% endwith %}
+{% for char in vari %}
+<span>{{ char|capfirst|lower|capfirst|make_list }}</span>
+{% comment %}
+<h2>{{ numi|}}</h2>
+{% endcomment %}
+{# {{iajao|somecrap}} this is a one-line comment in django temmplates #}
+{% endfor %}
+<hr>
+<h2>{{ vari|pprint }} -> This is a sample string pprinted</h2>
+"{{ vari|rjust:"121" }}" -> This is the rjusted (121) string from above (which does not really work as expected)
+<p>{{ vari|random }} -> this is a random item from the string above</p>
+<p>{{ vari|slice:"2:6" }} -> this is a slice (2:6)</p>
+<p>{{ vari|slugify }} -> slugify filter</p>
+<p>{{ vari|length }} -> length filter</p>
+<p>{{ vari|title }} -> title filter</p>
+<p>{{ vari|truncatechars:6 }} -> truncatechars (6) filter</p>
+<p>{{ vari|truncatewords:2 }} -> truncatewords (2) filter</p>
+<p>{{ vari|wordcount }} -> wordcount filter</p>
+<p>{{ vari|wordwrap:5 }} -> wordwrap (5) filter <br> (doesn't work as expected, since browser condenses whitespace!?)</p>
+<hr>
+<h2>templates applied to numi variable</h2>
+<p>{{ numi|stringformat:"rlll" }} -> stringformat (rlll) filter</p>
+
+{% load static %}
+<img src="{% static 'codermatch/mantra_happy_developer.png' %}" alt="Mantra of a happy developer" width=700>

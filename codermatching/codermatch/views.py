@@ -1,0 +1,94 @@
+from django.shortcuts import render
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+#from django.template import loader
+from django.shortcuts import get_object_or_404, render
+from django.template import context
+from django.urls import reverse
+
+from .models import Ad, Comment
+
+# Create your views here.
+def index(request):
+    # return HttpResponse("Hello, world, You're at the codermatch index (main page). Here you should be able to see a collection of the most recent (or popular, or ...) ads. Maybe you could also be able to search ads from here with a search text field.")
+
+    # latestAdList = Ad.objects.order_by('-pubDate')[:6]
+    # output = ', '.join([ad.projectTitle for ad in latestAdList])
+    # return HttpResponse(output)
+
+    # latestAdLi = Ad.objects.order_by('-pubDate')[:6]
+    # template = loader.get_template('codermatch/index.html')
+    # context = {
+    #     'latestAdList': latestAdLi,
+    # }
+    # return HttpResponse(template.render(context, request))
+    
+    latestAdLi = Ad.objects.order_by('-pubDate')[:5]
+    context = {'latestAdList': latestAdLi}
+    return render(request, 'codermatch/index.html', context) #render is the shortcut to taking a request, loading a template and respond the HTML text result based on the context dictionary
+
+
+def detail(request, adId):
+    # return HttpResponse(f'You are looking at ad #{adId}')
+
+    # try:
+    #     ad = Ad.objects.get(pk=adId)
+    # except Ad.DoesNotExist:
+    #     raise Http404('Ad does not exist...')
+    # context = {'ad': ad}
+    # return render(request, 'codermatch/detail.html', context)
+
+    ad = get_object_or_404(Ad, pk=adId) #get_object_or_404 is the shortcut to test whether an object exists and raising a Http404 response manually if it does not exist
+    context = {'ad': ad}
+    return render(request, 'codermatch/detail.html', context)
+
+
+def createAd(request):
+    """
+    This view method enables to publish own individual ads on the page.
+    """
+    return render(request, 'codermatch/createAd.html')
+
+def adSearch(request):
+    return HttpResponse('This function should should view a search where people could sort and search for ads with certain properties...')
+
+
+
+
+def vote(request, adId):
+    ad = get_object_or_404(Ad, pk=adId)
+    try:
+        selected_comment = ad.comment_set.get(pk=request.POST['comment'])
+    except (KeyError, Comment.DoesNotExist):
+        # Redisplay the ad voting form.
+        return render(request, 'codermatch/commentVote.html', {
+            'ad': ad,
+            'error_message': "You didn't select a comment.",
+        })
+    else:
+        selected_comment.likes += 1
+        selected_comment.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(ad.id,)))
+
+
+def results(request, adId):
+    ad = get_object_or_404(Ad, pk=adId)
+    #this is a dummy - not finished
+
+
+
+
+
+
+
+
+
+
+
+def testTemplating(request, numArg=10):
+    vari = 'a Python string'
+    numi = 89.3
+    context = {'numArg': numArg, 'vari': vari, 'numi': numi}
+    return render(request, 'codermatch/testTemplating.html', context=context)

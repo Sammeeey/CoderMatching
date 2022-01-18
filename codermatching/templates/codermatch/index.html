@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+<!-- nothing added in here to remove back-to-index-link specified in base template -->
+{% endblock header %}
+
+{% block main %}
+{% if latestAdList %}
+    <ul>
+        {% for ad in latestAdList %}
+        <li>
+            {% comment %}
+            <!-- <a href="/codermatch/ad-detail/{{ ad.id }}">{{ ad.projectTitle }}</a> -->
+            <!-- <a href="{% url 'adDetail' adId=ad.id %}">{{ ad.projectTitle }}</a> --> <!--This is the first approach from the django docs tutorial https://docs.djangoproject.com/en/4.0/intro/tutorial03/#removing-hardcoded-urls-in-templates -->
+            {% endcomment %}
+            <a href="{% url 'codermatch:adDetail' adId=ad.id %}">{{ ad.projectTitle }}</a> <!-- This is the recommended approach from the django docs tut https://docs.djangoproject.com/en/4.0/intro/tutorial03/#namespacing-url-names -->
+        </li>
+{% endfor %}
+    </ul>
+{% else %}
+    <p>No ads are available...</p>
+{% endif %}
+{% endblock main %}

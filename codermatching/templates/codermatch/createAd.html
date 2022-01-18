@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    welcome to createAd.html
+
+    <form action="{% url 'codermatch:createAd' %}">{% csrf_token %}
+
+    </form>
+{% endblock main %}
