@@ -38,8 +38,32 @@ def detail(request, adId):
     # return render(request, 'codermatch/detail.html', context)
 
     ad = get_object_or_404(Ad, pk=adId) #get_object_or_404 is the shortcut to test whether an object exists and raising a Http404 response manually if it does not exist
-    context = {'ad': ad}
-    return render(request, 'codermatch/detail.html', context)
+    # context = {'ad': ad}
+    # return render(request, 'codermatch/detail.html', context)
+
+    # try to send form data as POST request on page load
+    try:
+        selected_comment = ad.comment_set.get(pk=request.POST['comment'])
+    except (KeyError, Comment.DoesNotExist):
+        # if request method is GET, render the page without an error message
+        if request.method == 'GET':
+            context = {
+                'ad': ad,
+            }
+            return render(request, 'codermatch/detail.html', context=context)
+        else: # if request.method == 'POST':
+            # Redisplay the ad voting form.
+            return render(request, 'codermatch/detail.html', {
+                'ad': ad,
+                'error_message': "You didn't select a comment.",
+            })
+    else:
+        selected_comment.likes += 1
+        selected_comment.save()
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(ad.id,)))    
 
 
 def createAd(request):
@@ -50,37 +74,6 @@ def createAd(request):
 
 def adSearch(request):
     return HttpResponse('This function should should view a search where people could sort and search for ads with certain properties...')
-
-
-
-
-def vote(request, adId):
-    ad = get_object_or_404(Ad, pk=adId)
-    try:
-        selected_comment = ad.comment_set.get(pk=request.POST['comment'])
-    except (KeyError, Comment.DoesNotExist):
-        # Redisplay the ad voting form.
-        return render(request, 'codermatch/commentVote.html', {
-            'ad': ad,
-            'error_message': "You didn't select a comment.",
-        })
-    else:
-        selected_comment.likes += 1
-        selected_comment.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(ad.id,)))
-
-
-def results(request, adId):
-    ad = get_object_or_404(Ad, pk=adId)
-    #this is a dummy - not finished
-
-
-
-
-
 
 
 
