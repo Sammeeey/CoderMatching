@@ -1,9 +1,23 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    welcome to createAd.html
+<form action="{% url 'codermatch:createAd' %}" method="post">
+    {% csrf_token %}
+    <label for="project-title">Project Title:</label>
+    <input type="text" name="project-title" id="project-title" required>
+    
+    <label for="project-description">Project Description:</label>
+    <input type="text" name="project-description" id="project-description" required>
+    
+    <label for="creator-name">Name:</label>
+    <input type="text" name="creator-name" id="creator-name" placeholder="What's your name?" required>
 
-    <form action="{% url 'codermatch:createAd' %}">{% csrf_token %}
+    <label for="contact-details">Contact Details:</label>
+    <input type="text" name="contact-details" id="contact-details" required>
 
-    </form>
+    <label for="project-start-date">Date of project start</label>
+    <input type="date" name="project-start-date" id="project-start-date" placeholder="When did you start your project?">
+
+    <input type="submit" name="submit-ad" id="submit-ad" value="Create Ad">
+</form>
 {% endblock main %}
