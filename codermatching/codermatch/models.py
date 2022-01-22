@@ -20,6 +20,8 @@ class Ad(models.Model):
 
     # user account and name of ad creator
     # adCreator = #TODO: define a user here
+    # real name or nick name of the ad creator (for now - as long as no user account functionality set up)
+    creatorName = models.CharField(max_length=50)
 
     #project description
         #purpose of ad - What is you goal for your project? What are your searching for? What do you need?
