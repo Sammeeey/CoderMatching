@@ -1,3 +1,6 @@
+### SOURCES FOR TESTING ###
+# https://groups.google.com/g/django-users/c/cYWzRLulMPM/m/ABfy45uU3_UJ
+
 from django.test import TestCase
 
 # Create your tests here.
