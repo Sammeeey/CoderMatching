@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,visualstudiocode,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,visualstudiocode,python
 
+### Samuel's additions ###
+nonCode/
+
 ### Django ###
 *.log
 *.pot
