@@ -1,0 +1,13 @@
+{% extends createAd.html %}
+
+{% block main %}
+<form action="{% url 'codermatch:createAd' %}" method="get">
+    <!-- TODO: This here is rather a presenter ad
+    maybe create a more basic ad for all puposes first -->
+    <label for="project-title">
+        Which catchy title describes your project best?
+    </label>
+    <input type="text" name="project-title" id="project-title" required>
+    <label for="project-description">Please</label>
+</form>
+{% endblock main %}
