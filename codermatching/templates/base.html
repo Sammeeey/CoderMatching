@@ -8,6 +8,8 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
 
 -->
 
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,8 +24,10 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
     <body>
         <header>
         {% block header %}
-        <p><a href="{% url 'codermatch:index' %}">&lt; back to index</a></p>
-            <nav></nav>
+        <nav>
+            <a href="{% url 'codermatch:index' %}"><img src="{% static '/images/Logo_CoderMatching.png' %}" alt="CoderMatching Logo" width="200"></a>
+            <a href="{% url 'codermatch:createAd' %}">create ad</a>
+        </nav>
         {% endblock header %}
         </header>
         <main>
