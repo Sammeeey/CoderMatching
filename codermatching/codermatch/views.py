@@ -70,7 +70,18 @@ def createAd(request):
     """
     This view method enables to publish own individual ads on the page.
     """
-    return render(request, 'codermatch/createAd.html')
+    #if it's a post request: create a new object by posting the form data & display the created ad
+    if request.method == 'POST':
+        newAd = Ad(projectTitle='project-title',
+                    creatorName='creator-name',
+                    projectDescription='project-description',
+                    contactDetails='contact-details')
+        newAd.save()
+        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(newAd.id,)))
+    #if it's a get request: show the form
+    else: #if request.method == 'GET'
+        return render(request, 'codermatch/createAd.html')
+
 
 def adSearch(request):
     return HttpResponse('This function should should view a search where people could sort and search for ads with certain properties...')
