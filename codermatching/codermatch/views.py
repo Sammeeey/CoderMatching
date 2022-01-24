@@ -72,10 +72,15 @@ def createAd(request):
     """
     #if it's a post request: create a new object by posting the form data & display the created ad
     if request.method == 'POST':
-        newAd = Ad(projectTitle='project-title',
-                    creatorName='creator-name',
-                    projectDescription='project-description',
-                    contactDetails='contact-details')
+        projectTitle = request.POST['project-title']
+        creatorName = request.POST['creator-name']
+        projectDescription = request.POST['project-description']
+        contactDetails = request.POST['contact-details']
+
+        newAd = Ad(projectTitle=projectTitle,
+                    creatorName=creatorName,
+                    projectDescription=projectDescription,
+                    contactDetails=contactDetails)
         newAd.save()
         return HttpResponseRedirect(reverse('codermatch:adDetail', args=(newAd.id,)))
     #if it's a get request: show the form
