@@ -2,6 +2,8 @@ from django import forms
 from django.forms import DateInput
 
 class createAdForm(forms.Form):
+    template_name = "codermatch/formSnippet.html"
+
     projectTitle = forms.CharField(label='project title', max_length=100) # label property can actually be left empty: will be generated automatically anyways
     creatorName = forms.CharField(label='creator name', max_length=50)
     projectDescription = forms.CharField(label='project description', max_length=1500)

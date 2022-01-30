@@ -3,7 +3,7 @@
 {% block main %}
 <form action="{% url 'codermatch:createAd' %}" method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% include 'codermatch/formSnippet.html' %}
     <input type="submit" name="submit-ad" id="submit-ad" value="Create Ad">
 </form>
 {% endblock main %}

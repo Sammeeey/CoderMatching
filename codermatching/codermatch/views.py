@@ -78,17 +78,11 @@ def createAd(request):
         # check if it's valid
         if form.is_valid():
             # process form.cleaned_data as required
-            projectTitle = form.cleaned_data['projectTitle']
-            creatorName = form.cleaned_data['creatorName']
-            projectDescription = form.cleaned_data['projectDescription']
-            contactDetails = form.cleaned_data['contactDetails']
-            projectStartDate = form.cleaned_data['projectStartDate']
-
-            newAd = Ad(projectTitle=projectTitle,
-                        creatorName=creatorName,
-                        projectDescription=projectDescription,
-                        contactDetails=contactDetails,
-                        projectStartDate=projectStartDate)
+            newAd = Ad(projectTitle=form.cleaned_data['projectTitle'],
+                        creatorName=form.cleaned_data['creatorName'],
+                        projectDescription=form.cleaned_data['projectDescription'],
+                        contactDetails=form.cleaned_data['contactDetails'],
+                        projectStartDate=form.cleaned_data['projectStartDate'])
             newAd.save()
             # redirect to new URL:
             return HttpResponseRedirect(reverse(viewname='codermatch:adDetail', args=(newAd.id,)))
