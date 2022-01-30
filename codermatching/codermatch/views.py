@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import context
 from django.urls import reverse
 
+from .forms import createAdForm
 from .models import Ad, Comment
 
 # Create your views here.
@@ -70,22 +71,35 @@ def createAd(request):
     """
     This view method enables to publish own individual ads on the page.
     """
-    #if it's a post request: create a new object by posting the form data & display the created ad
+    # if POST request: process form data
     if request.method == 'POST':
-        projectTitle = request.POST['project-title']
-        creatorName = request.POST['creator-name']
-        projectDescription = request.POST['project-description']
-        contactDetails = request.POST['contact-details']
+        # create form instance + populate it with request data
+        form = createAdForm(request.POST)
+        # check if it's valid
+        if form.is_valid():
+            # process form.cleaned_data as required
+            projectTitle = form.cleaned_data['projectTitle']
+            creatorName = form.cleaned_data['creatorName']
+            projectDescription = form.cleaned_data['projectDescription']
+            contactDetails = form.cleaned_data['contactDetails']
+            projectStartDate = form.cleaned_data['projectStartDate']
 
-        newAd = Ad(projectTitle=projectTitle,
-                    creatorName=creatorName,
-                    projectDescription=projectDescription,
-                    contactDetails=contactDetails)
-        newAd.save()
-        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(newAd.id,)))
-    #if it's a get request: show the form
-    else: #if request.method == 'GET'
-        return render(request, 'codermatch/createAd.html')
+            newAd = Ad(projectTitle=projectTitle,
+                        creatorName=creatorName,
+                        projectDescription=projectDescription,
+                        contactDetails=contactDetails,
+                        projectStartDate=projectStartDate)
+            newAd.save()
+            # redirect to new URL:
+            return HttpResponseRedirect(reverse(viewname='codermatch:adDetail', args=(newAd.id,)))
+    # if it's a GET request: show the unpopulated form
+    elif request.method == 'GET':
+        form = createAdForm()
+    # if it's neither a POST, nor a GET request: send back to index page
+    else:
+        raise Http404('Only GET and POST requests are allowed')
+    
+    return render(request=request, template_name='codermatch/createAd.html', context={'form': form})
 
 
 def adSearch(request):
