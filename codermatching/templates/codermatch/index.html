@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block main %}
+{% block howTo %}
+<h2>How to find contribution on CoderMatching?</h2>
+<img src="{% static '/codermatch/images/22-02-08_How_to_CoderMatching.png' %}" alt="How to CoderMatching">
+{% endblock howTo %}
 {% if latestAdList %}
+<h2>Most recent classifieds</h2>
     <ul>
         {% for ad in latestAdList %}
         <li>
@@ -14,6 +20,9 @@
 {% endfor %}
     </ul>
 {% else %}
-    <p>No ads are available...</p>
+    <p>No classifieds are available...</p>
 {% endif %}
+{% block testimonials %}
+<!-- <div>[Here you'll see several testimonials soon...]</div> -->
+{% endblock testimonials %}
 {% endblock main %}

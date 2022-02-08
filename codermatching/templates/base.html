@@ -19,27 +19,45 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
         <meta name="description" content="A simple HTML5 Template for new projects.">
         <meta name="author" content="SitePoint">
         <title>{% block title %}CoderMatching - Build a team for your coding projects, gather experience and to START developing real world applications{% endblock title %}</title>
-        <link rel="stylesheet" href="styles/style.css">
+        <link rel="stylesheet" type="text/css" href="{% static '/codermatch/style.css' %}">
     </head>
     <body>
         <header>
         {% block header %}
         <nav>
-            <a href="{% url 'codermatch:index' %}"><img src="{% static '/images/Logo_CoderMatching.png' %}" alt="CoderMatching Logo" width="200"></a>
-            <a href="{% url 'codermatch:createAd' %}">create ad</a>
         </nav>
+        <div>
+            <a href="{% url 'codermatch:index' %}"><img src="{% static '/codermatch/images/Logo_CoderMatching.png' %}" alt="CoderMatching Logo" width="200"></a>
+            <p>
+                Find collaboration for coding projects<br>
+                build teams with complementing skills<br>
+                👩‍👩‍👧 👨‍👨‍👦‍👦
+            </p>
+            {% block needsInputField %}
+            <!-- <p>
+                [Here you'll see a "What do you need?" text input soon...]
+            </p> -->
+            {% endblock needsInputField %}
+            <a href="{% url 'codermatch:createAd' %}">create ad</a>
+        </div>
         {% endblock header %}
-        </header>
-        <main>
+    </header>
+    <main>
+        {% block trustLogos %}
+        <!-- <div>
+            [Here you'll see a block with trust logos (including press and/or company logos) soon...]
+        </div> -->
+        {% endblock trustLogos %}
         {% block main %}
         {% endblock main %}
         </main>
         <footer>
         {% block footer %}
+            <a href="https://twitter.com/codermatching">@CoderMatching</a>
         {% endblock footer %}
         </footer>
-        {% block scripts %}    
-        <script src="js/script.js"></script>
+        {% block scripts %}
+        <!-- <script src="js/script.js"></script> -->
         {% endblock scripts %}    
     </body>
 </html>
