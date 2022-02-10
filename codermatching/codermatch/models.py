@@ -4,6 +4,7 @@ from django.db import models
 from django.utils import timezone
 
 
+
 # Create your models here.
 class Ad(models.Model):
     """
@@ -15,6 +16,9 @@ class Ad(models.Model):
     def __str__(self) -> str:
         return self.projectTitle
 
+    def in30Days():
+        return timezone.now() + datetime.timedelta(days=30)
+    
     #project title
     projectTitle = models.CharField(max_length=100)
 
@@ -41,7 +45,7 @@ class Ad(models.Model):
     #TODO: expiration date of ad (may not be visible - but important for backend/database purposes)
         #TODO: users should receive email notification one week before expiration (to have the chance to extend ads' expiration date by another month)
     #projectStartDate + 30 days (may use timedelta)
-    expirationTime = models.DateTimeField('expiration time (of ad)', default=timezone.now() + datetime.timedelta(days=30))
+    expirationTime = models.DateTimeField('expiration time (of ad)', default=in30Days)
         #TODO: delete ad automatically when expiration time is now
 
     #publishedRecently (function from djangoDocsTutorial: https://docs.djangoproject.com/en/4.0/intro/tutorial02/#playing-with-the-api)

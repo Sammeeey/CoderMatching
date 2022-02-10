@@ -91,7 +91,10 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'b\}9"27*2T0?5J|tvP1O',
         'HOST': '127.0.0.1',
-        'PORT': ''
+        'PORT': '',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
 
