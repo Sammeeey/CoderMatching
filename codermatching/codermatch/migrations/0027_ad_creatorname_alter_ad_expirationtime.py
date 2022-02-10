@@ -9,7 +9,7 @@ from django.utils.timezone import utc
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('codermatch', '0026_alter_ad_expirationtime'),
+        ('codermatch', '0015_alter_ad_expirationtime'),
     ]
 
     operations = [

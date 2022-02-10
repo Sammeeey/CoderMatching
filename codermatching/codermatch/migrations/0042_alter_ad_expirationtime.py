@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('codermatch', '0041_alter_ad_expirationtime'),
+        ('codermatch', '0034_alter_ad_expirationtime'),
     ]
 
     operations = [
