@@ -38,7 +38,7 @@ class Ad(models.Model):
     pubDate = models.DateTimeField('publication date (of ad)', auto_now_add=True, blank=True) #publication date should not be editable
 
     #TODO: (start date of project - When did you start with the project?)
-    projectStartDate = models.DateField('project started (date)', blank=True) #start date should be editable by creator
+    projectStartDate = models.DateField('project started (date)', blank=True, null=True) #start date should be editable by creator
 
     #(location - Where are you planning to meet for the development of this project? -> should ideally be remote!?)
 

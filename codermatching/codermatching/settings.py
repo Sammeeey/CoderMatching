@@ -85,9 +85,21 @@ WSGI_APPLICATION = 'codermatching.wsgi.application'
 # }
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'codermatchingdb',
+    #     'USER': 'root',
+    #     'PASSWORD': 'b\}9"27*2T0?5J|tvP1O',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '',
+    #     'OPTIONS': {
+    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+    #     }
+    # }
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'codermatchingdb',
+        'NAME': 'codermatch_db',
         'USER': 'root',
         'PASSWORD': 'b\}9"27*2T0?5J|tvP1O',
         'HOST': '127.0.0.1',
