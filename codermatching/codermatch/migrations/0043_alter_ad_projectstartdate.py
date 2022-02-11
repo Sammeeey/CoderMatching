@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='ad',
             name='projectStartDate',
-            field=models.DateField(blank=True, verbose_name='project started (date)'),
+            field=models.DateField(blank=True, null=True, verbose_name='project started (date)'),
         ),
     ]
