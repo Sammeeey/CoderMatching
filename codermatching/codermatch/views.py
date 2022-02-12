@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import context
 from django.urls import reverse
 
-from .forms import createAdForm
+from .forms import CreateAdForm
 from .models import Ad, Comment
 
 # Create your views here.
@@ -74,7 +74,7 @@ def createAd(request):
     # if POST request: process form data
     if request.method == 'POST':
         # create form instance + populate it with request data
-        form = createAdForm(request.POST)
+        form = CreateAdForm(request.POST)
         # check if it's valid
         if form.is_valid():
             # process form.cleaned_data as required
@@ -83,7 +83,7 @@ def createAd(request):
             return HttpResponseRedirect(reverse(viewname='codermatch:adDetail', args=(newAd.id,)))
     # if it's a GET request: show the unpopulated form
     elif request.method == 'GET':
-        form = createAdForm()
+        form = CreateAdForm()
     # if it's neither a POST, nor a GET request: send back to index page
     else:
         raise Http404('Only GET and POST requests are allowed')

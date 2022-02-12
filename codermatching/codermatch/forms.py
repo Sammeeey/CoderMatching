@@ -1,7 +1,7 @@
 from .models import Ad
 from django.forms import DateInput, ModelForm
 
-class createAdForm(ModelForm):
+class CreateAdForm(ModelForm):
     class Meta:
         model = Ad
         fields = ['adTitle',
