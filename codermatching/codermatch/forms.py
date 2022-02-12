@@ -4,11 +4,12 @@ from django.forms import DateInput, ModelForm
 class createAdForm(ModelForm):
     class Meta:
         model = Ad
-        fields = ['projectTitle',
+        fields = ['adTitle',
+                'adPurpose',
+                'adDescription',
                 'creatorName',
-                'projectDescription',
                 'contactDetails',
-                'projectStartDate']
+                ]
         widgets = {
             'projectStartDate': DateInput(attrs={'type': 'date'}),
         }

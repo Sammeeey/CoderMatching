@@ -13,23 +13,32 @@ class Ad(models.Model):
     Individual needs, puposes and goals of people who post ads may differ.
     But this class should cover all basic information which would otherwise cause repetition in classes which inherit from this Ads()-class.
     """
+    class AdPurpose(models.IntegerChoices):
+        PRESENT_A_PROJECT = 1
+        FIND_A_PROJECT = 2
+        SOMETHING_ELSE = 3
+
     def __str__(self) -> str:
-        return self.projectTitle
+        return self.adTitle
 
     def in30Days():
         return timezone.now() + datetime.timedelta(days=30)
     
-    #project title
-    projectTitle = models.CharField(max_length=100)
+    #ad title
+    adTitle = models.CharField(max_length=100)
+
+    # purpose (project presentation, project search or something else?) - radio buttons!?
+    adPurpose = models.IntegerField(choices=AdPurpose.choices, default=AdPurpose.PRESENT_A_PROJECT)
 
     # user account and name of ad creator
     # adCreator = #TODO: define a user here
     # real name or nick name of the ad creator (for now - as long as no user account functionality set up)
     creatorName = models.CharField(max_length=50)
 
-    #project description
-        #purpose of ad - What is you goal for your project? What are your searching for? What do you need?
-    projectDescription = models.TextField(max_length=1500)
+    #ad description: purpose of ad - What is you goal for your ad? What are your searching for? What do you need?
+    adDescription = models.TextField(max_length=1500)
+
+    #TODO: image upload field
 
     #contact details of ad creator - How, Where to ad creator
     contactDetails = models.CharField(max_length=300)
@@ -37,25 +46,15 @@ class Ad(models.Model):
     #creation date of ad
     pubDate = models.DateTimeField('publication date (of ad)', auto_now_add=True, blank=True) #publication date should not be editable
 
-    #TODO: (start date of project - When did you start with the project?)
-    projectStartDate = models.DateField('project started (date)', blank=True, null=True) #start date should be editable by creator
-
-    #(location - Where are you planning to meet for the development of this project? -> should ideally be remote!?)
-
     #TODO: expiration date of ad (may not be visible - but important for backend/database purposes)
         #TODO: users should receive email notification one week before expiration (to have the chance to extend ads' expiration date by another month)
-    #projectStartDate + 30 days (may use timedelta)
+    #ad creation date + 30 days (may use timedelta)
     expirationTime = models.DateTimeField('expiration time (of ad)', default=in30Days)
         #TODO: delete ad automatically when expiration time is now
 
     #publishedRecently (function from djangoDocsTutorial: https://docs.djangoproject.com/en/4.0/intro/tutorial02/#playing-with-the-api)
     def publishedRecently(self):
         return self.pubDate >= timezone.now() - datetime.timedelta(days=1)
-
-    #(like - How many people have clicked the like button?)
-    likes = models.IntegerField(default=0)
-
-    #...
 
 
 #comment class (just to have a model which relates to the Ad model like "Question" & "Choice" in djangoDocsTutorial)
