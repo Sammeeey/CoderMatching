@@ -48,6 +48,7 @@ class Ad(models.Model):
     creatorEmail = models.EmailField(max_length=150)
 
     #TODO: show email in public (boolean - yes/no)
+    showEmailPublic = models.BooleanField()
 
     #contact details of ad creator - How, Where to ad creator
     contactDetails = models.CharField(max_length=300)

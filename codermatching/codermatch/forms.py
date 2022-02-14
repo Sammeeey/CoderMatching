@@ -9,6 +9,7 @@ class CreateAdForm(ModelForm):
                 'adDescription',
                 'creatorName',
                 'creatorEmail',
+                'showEmailPublic',
                 ]
         widgets = {
             'projectStartDate': DateInput(attrs={'type': 'date'}),
