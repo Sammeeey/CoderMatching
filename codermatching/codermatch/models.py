@@ -44,6 +44,11 @@ class Ad(models.Model):
 
     #TODO: image upload field
 
+    #TODO: email adress field (mandatory)
+    creatorEmail = models.EmailField(max_length=150)
+
+    #TODO: show email in public (boolean - yes/no)
+
     #contact details of ad creator - How, Where to ad creator
     contactDetails = models.CharField(max_length=300)
 
