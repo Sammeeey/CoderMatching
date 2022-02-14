@@ -24,6 +24,10 @@ class Ad(models.Model):
     def in30Days():
         return timezone.now() + datetime.timedelta(days=30)
     
+    #publishedRecently (function from djangoDocsTutorial: https://docs.djangoproject.com/en/4.0/intro/tutorial02/#playing-with-the-api)
+    def publishedRecently(self):
+        return self.pubDate >= timezone.now() - datetime.timedelta(days=1)
+
     #ad title
     adTitle = models.CharField(max_length=100)
 
@@ -51,10 +55,6 @@ class Ad(models.Model):
     #ad creation date + 30 days (may use timedelta)
     expirationTime = models.DateTimeField('expiration time (of ad)', default=in30Days)
         #TODO: delete ad automatically when expiration time is now
-
-    #publishedRecently (function from djangoDocsTutorial: https://docs.djangoproject.com/en/4.0/intro/tutorial02/#playing-with-the-api)
-    def publishedRecently(self):
-        return self.pubDate >= timezone.now() - datetime.timedelta(days=1)
 
 
 #comment class (just to have a model which relates to the Ad model like "Question" & "Choice" in djangoDocsTutorial)
