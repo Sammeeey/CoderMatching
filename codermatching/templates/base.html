@@ -19,6 +19,7 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
         <meta name="description" content="A simple HTML5 Template for new projects.">
         <meta name="author" content="SitePoint">
         <title>{% block title %}CoderMatching - Build a team for your coding projects, gather experience and to START developing real world applications{% endblock title %}</title>
+        <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{% static '/codermatch/style.css' %}">
     </head>
     <body>
@@ -53,7 +54,8 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
         </main>
         <footer>
         {% block footer %}
-            <a href="https://twitter.com/codermatching">@CoderMatching</a>
+            <!-- actually you want to style the Twitter logo from footer of base template here - but seemingly it only works inline -->
+            <a href="https://twitter.com/codermatching"><i class="lab la-twitter" style="font-size: 35px; color: #1DA1F2;"></i>@CoderMatching</a>
         {% endblock footer %}
         </footer>
         {% block scripts %}
