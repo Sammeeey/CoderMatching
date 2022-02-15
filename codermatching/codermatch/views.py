@@ -29,18 +29,7 @@ def index(request):
 
 
 def detail(request, adId):
-    # return HttpResponse(f'You are looking at ad #{adId}')
-
-    # try:
-    #     ad = Ad.objects.get(pk=adId)
-    # except Ad.DoesNotExist:
-    #     raise Http404('Ad does not exist...')
-    # context = {'ad': ad}
-    # return render(request, 'codermatch/detail.html', context)
-
     ad = get_object_or_404(Ad, pk=adId) #get_object_or_404 is the shortcut to test whether an object exists and raising a Http404 response manually if it does not exist
-    # context = {'ad': ad}
-    # return render(request, 'codermatch/detail.html', context)
 
     # try to send form data as POST request on page load
     try:
