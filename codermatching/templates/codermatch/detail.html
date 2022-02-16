@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1>{{ ad.projectTitle }}</h1>
-<p>{{ ad.projectDescription }}</p>
+<h1>{{ object.adTitle }}</h1>
+<p>{{ object.adDescription }}</p>
 
 <form action="{% url 'codermatch:adDetail' ad.id %}" method="post">
     {% csrf_token %}

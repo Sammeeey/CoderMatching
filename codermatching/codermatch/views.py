@@ -4,6 +4,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.template import context
 from django.urls import reverse
+from django.views.generic.detail import DetailView
 
 from .forms import CreateAdForm
 from .models import Ad, Comment
@@ -28,33 +29,10 @@ def index(request):
     return render(request, 'codermatch/index.html', context) #render is the shortcut to taking a request, loading a template and respond the HTML text result based on the context dictionary
 
 
-def detail(request, adId):
-    ad = get_object_or_404(Ad, pk=adId) #get_object_or_404 is the shortcut to test whether an object exists and raising a Http404 response manually if it does not exist
-
-    # try to send form data as POST request on page load
-    try:
-        selected_comment = ad.comment_set.get(pk=request.POST['comment'])
-    except (KeyError, Comment.DoesNotExist):
-        # if request method is GET, render the page without an error message
-        if request.method == 'GET':
-            context = {
-                'ad': ad,
-            }
-            return render(request, 'codermatch/detail.html', context=context)
-        else: # if request.method == 'POST':
-            # Redisplay the ad voting form.
-            return render(request, 'codermatch/detail.html', {
-                'ad': ad,
-                'error_message': "You didn't select a comment.",
-            })
-    else:
-        selected_comment.likes += 1
-        selected_comment.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('codermatch:adDetail', args=(ad.id,)))    
-
+class AdDetailView(DetailView):
+    template_name = 'codermatch/detail.html'
+    queryset = Ad.objects.all()
+    
 
 def createAd(request):
     """
