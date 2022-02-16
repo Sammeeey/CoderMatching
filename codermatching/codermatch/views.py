@@ -9,6 +9,8 @@ from django.views.generic.detail import DetailView
 from .forms import CreateAdForm
 from .models import Ad, Comment
 
+from django.utils import timezone
+
 # Create your views here.
 def index(request):
     # return HttpResponse("Hello, world, You're at the codermatch index (main page). Here you should be able to see a collection of the most recent (or popular, or ...) ads. Maybe you could also be able to search ads from here with a search text field.")
@@ -30,9 +32,8 @@ def index(request):
 
 
 class AdDetailView(DetailView):
+    model = Ad
     template_name = 'codermatch/detail.html'
-    queryset = Ad.objects.all()
-    
 
 def createAd(request):
     """
