@@ -1,34 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block needsInputField %}
+{% endblock needsInputField %}
 
 {% block main %}
+
+<img src="{% static '/codermatch/images/uncle_sam_lightOrange_bg.png' %}" alt="uncle-CoderMatching">
 <h1>{{ object.adTitle }}</h1>
+<p>
+    <strong>Purpose: </strong>
+    {% if object.adPurpose == 1 %}
+        Present a project
+    {% elif object.adPurpose == 2 %}
+        Find a project
+    {% else %} <!-- object.adPurpose == 3 -->
+        Something else
+    {% endif %}
+</p>
+
+<span><strong>Publication Date: </strong>{{ object.pubDate }}</span>
+
+<p><strong>Description:</strong></p>
 <p>{{ object.adDescription }}</p>
 
-<form action="{% url 'codermatch:adDetail' ad.id %}" method="post">
-    {% csrf_token %}
-    <fieldset>
-        <legend>
-            <h3>Comments on {{ ad.projectTitle }}</h3>
-        </legend>
-        {% if error_message %}
-            <p style="color: red;"><strong>{{ error_message }}</strong></p>
-        {% endif %}
+<p><strong>Contact Details:</strong></p>
+<p>{{ object.creatorName }}</p>
+<p>
+    {% if object.showEmailPublic %}
+    {{ object.creatorEmail }}
+    {% else %}
+    The creator of this classified ad doesn't want to show their email publically.<br>
+    You may find the contact details in the description above.
+    {% endif %}
+</p>
 
-        <u>Wanna vote on the following comments?</u><br>
-        {% for comment in ad.comment_set.all %}
-        <input type="radio" name="comment" id="comment{{ forloop.counter }}" value="{{ comment.id }}">
-        <label for="comment{{ forloop.counter }}"><strong>{{ comment.commentText }}</strong> ({{ comment.likes }} ❤️)</label><br>
-        {% empty %}
-        <ul>
-            <p>There aren't any comments on this project, yet.</p>
-            <p>but with the lorem template tag we imitate a similar behavior:</p>
-            <li>Pseudo-Comment: {% lorem 1 %}</li>
-            <li>Pseudo-Comment: {% lorem 1 p random %}</li>
-            <li>Pseudo-Comment: {% lorem 1 %}</li>
-        </ul>
 
-        {% endfor %}
-    </fieldset>
-<input type="submit" name="submit" id="submit" value="like">
-</form>
 {% endblock main %}
