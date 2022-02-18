@@ -59,6 +59,10 @@ def createAd(request):
     return render(request=request, template_name='codermatch/createAd.html', context={'form': form})
 
 
+def contribute(request):
+    return render(request, template_name='codermatch/contribute.html')
+
+
 def adSearch(request):
     return HttpResponse('This function should should view a search where people could sort and search for ads with certain properties...')
 

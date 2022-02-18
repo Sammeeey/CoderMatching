@@ -9,4 +9,5 @@ urlpatterns = [
     path('ad-search/', views.adSearch, name='adSearch'),
     path('ad-detail/<int:pk>/', AdDetailView.as_view(), name='adDetail'),
     path('create-ad/', views.createAd, name='createAd'),
+    path('contribute/', views.contribute, name='contribute'),
 ]
