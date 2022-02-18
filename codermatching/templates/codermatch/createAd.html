@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 
+{% block needsInputField %}
+{% endblock needsInputField %}
+
 {% block main %}
 <form action="{% url 'codermatch:createAd' %}" method="post">
     {% csrf_token %}
