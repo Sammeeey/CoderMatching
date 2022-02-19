@@ -55,7 +55,8 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
         <footer>
         {% block footer %}
             <!-- actually you want to style the Twitter logo from footer of base template here - but seemingly it only works inline -->
-            <a href="https://twitter.com/codermatching"><i class="lab la-twitter" style="font-size: 35px; color: #1DA1F2;"></i>@CoderMatching</a>
+            <a href="https://twitter.com/codermatching"><i class="lab la-twitter" style="font-size: 35px; color: #1DA1F2;"></i>@CoderMatching</a> |
+            <a href="{% url 'codermatch:contribute' %}">contribute🤗</a>
         {% endblock footer %}
         </footer>
         {% block scripts %}
