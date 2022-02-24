@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--pr#th4&@(fmp^2_ht#+!yrq$v5*2kqzc%@wfnole4(+096d@o'
+SECRET_KEY = os.environ['SEC_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,23 +85,11 @@ WSGI_APPLICATION = 'codermatching.wsgi.application'
 # }
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'codermatchingdb',
-    #     'USER': 'root',
-    #     'PASSWORD': 'b\}9"27*2T0?5J|tvP1O',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '',
-    #     'OPTIONS': {
-    #         'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-    #     }
-    # }
-
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'codermatch_db',
-        'USER': 'root',
-        'PASSWORD': 'b\}9"27*2T0?5J|tvP1O',
+        'NAME': os.environ['DB_NAME'],
+        'USER': os.environ['DB_USER'],
+        'PASSWORD': os.environ['DB_PASSWORD'],
         'HOST': '127.0.0.1',
         'PORT': '',
         'OPTIONS': {
@@ -161,3 +149,21 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# --- NON-DEFAULT SETTINGS ---
+
+# Email settings
+# Tutorials: https://www.sitepoint.com/django-send-email/#usingdjangoenvirontohidesensitivekeys & https://medium.com/@_christopher/how-to-send-emails-with-python-django-through-google-smtp-server-for-free-22ea6ea0fb8e
+# environment variables: https://www.youtube.com/watch?v=IolxqkL7cD8
+# email settings (start): https://docs.djangoproject.com/en/4.0/ref/settings/#email-backend
+
+# Email reports and Server errors: https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
+ADMINS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),]  # people being notified with email reports (like errors): https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
+SERVER_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
+
+# EMAIL_BACKEND defaults to 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST_NAME']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
