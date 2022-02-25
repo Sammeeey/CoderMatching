@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SEC_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1']
 
 
 # Application definition
@@ -161,9 +161,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMINS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),]  # people being notified with email reports (like errors): https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
 SERVER_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
 
-# EMAIL_BACKEND defaults to 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = os.environ['EMAIL_HOST_NAME']
 EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']
 EMAIL_HOST_USER = os.environ['EMAIL_USER']
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+# HTTPS https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#https
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
