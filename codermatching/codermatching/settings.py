@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import re
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',  # to activate 404 error sending to MANAGERS; based on https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#admins-and-managers & https://docs.djangoproject.com/en/4.0/howto/error-reporting/#errors
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -157,6 +159,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # environment variables: https://www.youtube.com/watch?v=IolxqkL7cD8
 # email settings (start): https://docs.djangoproject.com/en/4.0/ref/settings/#email-backend
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ['EMAIL_HOST_NAME']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 # Email reports and Server errors: https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
 ADMINS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),]  # people being notified with email reports (like 500 errors): https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
 MANAGERS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),] # people being notified with email reports (like 404 errors): https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#admins-and-managers
@@ -164,12 +173,11 @@ SERVER_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
 
 DEFAULT_FROM_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ['EMAIL_HOST_NAME']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_PW']
-EMAIL_HOST_USER = os.environ['EMAIL_USER']
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+IGNORABLE_404_URLS = [
+    re.compile(r'^/apple-touch-icon.*\.png$'),
+    re.compile(r'^/favicon\.ico$'),
+    re.compile(r'^/robots\.txt$'),
+]
 
 # HTTPS https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#https
 CSRF_COOKIE_SECURE = True
