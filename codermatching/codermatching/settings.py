@@ -158,7 +158,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # email settings (start): https://docs.djangoproject.com/en/4.0/ref/settings/#email-backend
 
 # Email reports and Server errors: https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
-ADMINS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),]  # people being notified with email reports (like errors): https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
+ADMINS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),]  # people being notified with email reports (like 500 errors): https://docs.djangoproject.com/en/4.0/howto/error-reporting/#email-reports
+MANAGERS = [('CoderMatching', os.environ['MAIN_MAIL_ADDRESS']),] # people being notified with email reports (like 404 errors): https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#admins-and-managers
 SERVER_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
 
 DEFAULT_FROM_EMAIL = os.environ['MAIN_MAIL_ADDRESS']
