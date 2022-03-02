@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import django_heroku
 import os
 import re
 
@@ -182,3 +183,8 @@ IGNORABLE_404_URLS = [
 # HTTPS https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/#https
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+# Configuring Django Apps for Heroku
+# https://devcenter.heroku.com/articles/django-app-configuration#settings-py-changes
+# Activate Django-Heroku.
+django_heroku.settings(locals())
