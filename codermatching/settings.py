@@ -139,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# STATIC_ROOT = "/var/www/example.com/static/"  # based on: https://docs.djangoproject.com/en/4.0/howto/static-files/#deployment & https://docs.djangoproject.com/en/4.0/howto/static-files/deployment/#serving-static-files-in-production > https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-STATIC_ROOT
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # based on: https://devcenter.heroku.com/articles/django-assets
 
 # STATICFILES_STORAGE = 'codermatching.storage.S3Storage'   # based on: https://docs.djangoproject.com/en/4.0/howto/static-files/#configuring-static-files > https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-STATICFILES_STORAGE > https://docs.djangoproject.com/en/4.0/howto/static-files/deployment/#staticfiles-from-cdn
 
