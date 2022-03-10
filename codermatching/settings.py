@@ -143,6 +143,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # based on: https://devcente
 
 # STATICFILES_STORAGE = 'codermatching.storage.S3Storage'   # based on: https://docs.djangoproject.com/en/4.0/howto/static-files/#configuring-static-files > https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-STATICFILES_STORAGE > https://docs.djangoproject.com/en/4.0/howto/static-files/deployment/#staticfiles-from-cdn
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+    # ("images", os.path.join(BASE_DIR, '/codermatch/static/codermatch/images')),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
