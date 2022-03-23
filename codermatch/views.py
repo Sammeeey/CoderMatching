@@ -59,8 +59,8 @@ def createAd(request):
     return render(request=request, template_name='codermatch/createAd.html', context={'form': form})
 
 
-def contribute(request):
-    return render(request, template_name='codermatch/contribute.html')
+def howToCoderMatching(request):
+    return render(request, template_name='codermatch/how_to_codermatching.html')
 
 
 def adSearch(request):
