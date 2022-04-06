@@ -1,12 +1,19 @@
-## practices/habits we follow for contributions to the CoderMatching project 
+## State of the App (Screenshots from live Application)
+### Landing Page
+![codermatching-landingpage](https://user-images.githubusercontent.com/49591562/161974028-86f4936b-a972-4571-a601-ab3f39978920.png)
 
-### documentation
+### How to Codermatching Page
+![how-to-codermatching](https://user-images.githubusercontent.com/49591562/161974364-ab3d5f00-a95b-47b1-be81-7a4aaa6846b1.png)
 
-- git commits based on [Bolaji's *Writing Good Commit Messages: A Practical Guide*](https://blog.bolajiayodeji.com/writing-good-commit-messages-a-practical-guide)
-	- using *try* prefix in front of commit messages to indicate non-working commits
-	- using branch descriptions (to remember purpose of branch) with [`git branch --edit-description`](https://stackoverflow.com/a/8858853) while being on the respective branch
-		- [How to find branch description from git command line](https://gist.github.com/ejmr/a927d32e25488a282bd3)
 
-### issue labels / label issues
-- always [add a **good first issue** label](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/encouraging-helpful-contributions-to-your-project-with-labels) to when creating an issue which is doable for beginners
-- maybe add additional labels if appropriate
+## Preliminary Wireframes (*Where to go?*)
+- complete [collection of wireframes](https://sam437893.invisionapp.com/freehand/CoderMatching--MVP--9A3NhYvtU?dsid_h=54da53730010118f92f1efe973830fa2d2ca6b5a0d4c7c627e20927d511d4546&uid_h=ab5511291023d2b221c9336d4cf5ede1af7a3652ec29c29fb700341a4cb989ea) available
+
+### Landing Page (wireframe)
+![landing-page-add-gallery-3](https://user-images.githubusercontent.com/49591562/161974848-1ca2ae6f-e245-40ea-b888-c39ef9ff4aef.png)
+
+### Ad Creation Form (wireframe)
+![ad-creation-form](https://user-images.githubusercontent.com/49591562/161974922-2f4177cc-5ff5-449f-aa24-47c03cc0ea0f.png)
+
+### Ad Detail Page (wireframe)
+![ad-detail](https://user-images.githubusercontent.com/49591562/161975044-4be72add-6d15-4334-bdd2-1f3fba29e5f3.png)
