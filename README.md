@@ -2,9 +2,6 @@
 ### Landing Page
 ![codermatching-landingpage](https://user-images.githubusercontent.com/49591562/161974028-86f4936b-a972-4571-a601-ab3f39978920.png)
 
-### Example Search Ad
-![codermatching-example-ad](https://user-images.githubusercontent.com/49591562/161973978-29423367-b178-47e8-86cf-656da56ae6ac.png)
-
 ### How to Codermatching Page
 ![how-to-codermatching](https://user-images.githubusercontent.com/49591562/161974364-ab3d5f00-a95b-47b1-be81-7a4aaa6846b1.png)
 
