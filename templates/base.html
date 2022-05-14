@@ -39,19 +39,18 @@ https://learndjango.com/tutorials/template-structure    -> either use the app or
         <header>
         {% block header %}
         <nav>
+            <a href="{% url 'codermatch:index' %}"><img id="header-logo" src="{% static 'codermatch/images/Logo_CoderMatching.png' %}" alt="CoderMatching Logo"></a>
         </nav>
         <div>
-            <a href="{% url 'codermatch:index' %}"><img src="{% static 'codermatch/images/Logo_CoderMatching.png' %}" alt="CoderMatching Logo" width="200"></a>
-            <p>
-                Find collaboration for coding projects<br>
-                build teams with complementing skills<br>
-                👩‍👩‍👧 👨‍👨‍👦‍👦
-            </p>
+            <h1>
+                <p id="post-an-ad">post an ad👌</p>
+                <p id="find-a-match">find a match</p>
+            </h1>
             {% block needsInputField %}
             <!-- <p>
                 [Here you'll see a "What do you need?" text input soon...]
             </p> -->
-            <a class="find-collab-button" href="{% url 'codermatch:createAd' %}">find collaboration now</a>
+            <a class="find-collab-button" href="{% url 'codermatch:createAd' %}">post ad</a>
             {% endblock needsInputField %}
         </div>
         {% endblock header %}

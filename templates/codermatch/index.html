@@ -2,12 +2,27 @@
 {% load static %}
 
 {% block main %}
-{% block howTo %}
-<h2>How to find contribution on CoderMatching?</h2>
-<img src="{% static 'codermatch/images/22-02-08_How_to_CoderMatching.png' %}" alt="How to CoderMatching">
-{% endblock howTo %}
+{% block findCollab %}
+
+<section class="benefits">
+    <p>Find Collaboration for coding Projects</p>
+    <p>⬇</p>
+    <p>Build Teams with complementing Skills</p>
+    <p>👨‍👩‍👧‍👦</p>
+</section>
+
+<section class="benefits">
+    <p>Post a Classifieds Ad</p>
+    <p>⬇</p>
+    <p>Build Real World Projects together</p>
+    <p>👫</p>
+</section>
+
+<a id="find-collab-button" class="find-collab-button" href="{% url 'codermatch:createAd' %}">find collaboration</a>
+
+{% endblock findCollab %}
 {% if latestAdList %}
-<h2>Most recent classifieds</h2>
+<h2>Most recent Classifieds</h2>
     <ul>
         {% for ad in latestAdList %}
         <li>
