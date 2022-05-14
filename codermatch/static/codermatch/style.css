@@ -1,25 +1,95 @@
-/*--- base.html ---*/
-body {
-    text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+
+/* minimal css reset for uniformity among browsers
+https://www.digitalocean.com/community/tutorials/css-minimal-css-reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
-/* based on https://www.w3schools.com/css/css3_buttons.asp */
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/*--- base.html ---*/
+body {
+  text-align: center;
+    font-family: 'Fredoka';
+    max-width: 90%;
+    margin: auto;
+}
+
+#header-logo {
+  max-width: 100%;
+  height: auto; /* explicitly implemented although it seems to work the same way without auto height */
+  margin-top: 1em;
+}
+
+h1, h1 * {
+  font-size: 46px;
+  margin: 0;
+}
+
+h2, h2 * {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+#post-an-ad {
+  font-family: 'Courgette';
+}
+
+#find-a-match {
+  font-weight: bold;
+  margin: -.2em auto 1.2em 1.4em;
+}
+
 .find-collab-button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
-    font-size: 16px;
-    border: 2px solid #4CAF50;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    background-color: black;
+    color: white;
+    font-size: 34px;
+    font-family: 'Courgette';
+    padding: .3em 1.1em;
+    text-decoration: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    border-radius: 6px;
+    border: 2px solid black;
+
   }
   
-  /* based on https://www.w3schools.com/css/css3_buttons.asp */
-  .find-collab-button:hover {
-    background-color: white;
-    color: #4CAF50; /* Green */
-    border: 2px solid;
-  }
+/* based on https://www.w3schools.com/css/css3_buttons.asp */
+.find-collab-button:hover {
+  background-color: white;
+  color: #4CAF50; /* Green */
+  border: 2px solid #4CAF50;
+}
+
+/*--- index.html ---*/
+.benefits {
+  font-size: 30px;
+  margin-top: 3.6em;
+  font-weight: 500;
+}
+
+#find-collab-button {
+  font-size: 28px;  /* to show button without line break on mobile - alternative: white-space: nowrap; */
+  margin: 3em auto;
+}
