@@ -10,10 +10,23 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from django.core.management.utils import get_random_secret_key
 from pathlib import Path
+# import dj_database_url
 import django_heroku
 import os
 import re
+# import sys
+
+# based on "Deploy a Django App on App Platform" (DigitalOcean)
+# https://docs.digitalocean.com/tutorials/app-deploy-django-app/
+
+# # development mode variable to use local or remote database seemlessly
+# # Uncomment along with respective database settings below,
+# # as soon as you use DigitalOcean for production
+# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True"
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,12 +36,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SEC_KEY']
+SECRET_KEY = os.getenv("SEC_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -87,19 +100,24 @@ DATABASES = {
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': os.environ['DB_NAME'],
-#         'USER': os.environ['DB_USER'],
-#         'PASSWORD': os.environ['DB_PASSWORD'],
-#         'HOST': '127.0.0.1',
-#         'PORT': '',
-#         'OPTIONS': {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+# # Database Access based on DigitalOcean Tutorial
+# # https://docs.digitalocean.com/tutorials/app-deploy-django-app/#configuring-database-access
+# # Uncomment along with respective DEVELOPMENT_MODE variable above,
+# # as soon as you use DigitalOcean for production
+
+# if DEVELOPMENT_MODE is True:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': BASE_DIR / 'db.sqlite3',
 #         }
 #     }
-# }
+# elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+#     if os.getenv("DATABASE_URL", None) is None:
+#         raise Exception("DATABASE_URL environment variable not defined")
+#     DATABASES = {
+#         "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+#     }
 
 
 # Password validation
@@ -138,8 +156,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/deployment/
 
 STATIC_URL = 'static/'
-
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # based on: https://devcenter.heroku.com/articles/django-assets
+
+# Uncomment if you have extra static files and a directory in your GitHub repo.
+# If you don't have this directory and have this uncommented your build will fail
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # STATICFILES_STORAGE = 'codermatching.storage.S3Storage'   # based on: https://docs.djangoproject.com/en/4.0/howto/static-files/#configuring-static-files > https://docs.djangoproject.com/en/4.0/ref/settings/#std:setting-STATICFILES_STORAGE > https://docs.djangoproject.com/en/4.0/howto/static-files/deployment/#staticfiles-from-cdn
 
@@ -147,6 +168,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # based on: https://devcente
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 
 # --- NON-DEFAULT SETTINGS ---
