@@ -1,5 +1,6 @@
 ## State of the App (Screenshots from live Application)
-The app is currently deployed at [https://codermatching.herokuapp.com/](https://codermatching.herokuapp.com/).
+The app was deployed at [https://codermatching.herokuapp.com/](https://codermatching.herokuapp.com/) until Heroku shut down the free tire.
+App not available anymore.
 
 ## Development Progress
 ### Phase 2 (current *Where to go?*)
